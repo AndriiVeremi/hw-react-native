@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   main: {
     marginHorizontal: 16,
     marginTop: 32,
-    height: 578,
+    height: 665,
   },
 
   wrap: {

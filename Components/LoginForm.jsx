@@ -5,10 +5,9 @@ const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleForm = () => {
+    const formSubmit = () => {
         console.log(email);
         console.log(password);
-
         reset();
     };
 
@@ -33,17 +32,17 @@ const LoginForm = () => {
             value={password}
             onChangeText={setPassword} />
         <Pressable>
-            <Text style={styles.inputLink}>Показати</Text>
+            <Text style={styles.link}>Показати</Text>
         </Pressable>
         <Pressable 
             style={styles.button}
-            onPress={handleForm}>
-            <Text style={styles.buttonText}>Увійти</Text>
+            onPress={formSubmit}>
+            <Text style={styles.textButton}>Увійти</Text>
         </Pressable>
-        <View style={styles.textWrap}>
+        <View style={styles.regesterContainer}>
             <Text style={styles.text}>Немає акаунту?</Text>
             <Pressable>
-                <Text style={styles.textLink}>Зареєструватися</Text>
+                <Text style={styles.textColor}>Зареєструватися</Text>
             </Pressable>
         </View>
     </View>
@@ -76,7 +75,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
 
-    inputLink: {
+    link: {
         position: 'absolute',
         top: -51,
         right: 16,
@@ -93,13 +92,13 @@ const styles = StyleSheet.create({
         borderRadius: 100,
     },
 
-    buttonText: {
+    textButton: {
         fontFamily: 'roboto-regular',
         fontSize: 16,
         color: '#FFFFFF',
     },
 
-    textWrap: {
+    regesterContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
         gap: 3,
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
         color: '#1B4371',
     },
 
-    textLink: {
+    textColor: {
         fontFamily: 'roboto-regular',
         fontSize: 16,
         color: '#1B4371',

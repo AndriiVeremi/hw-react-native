@@ -7,7 +7,9 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  Image,
 } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import RegistrationForm from "../Components/RegistrationForm";
 
 const RegistrationScreen = () => {
@@ -22,6 +24,17 @@ const RegistrationScreen = () => {
           style={styles.keyboardAvoidingView}
         >
           <View style={styles.container}>
+            <View style={styles.img}>
+              <Image
+                style={styles.avatar}
+                source={require("../assets/Images/Avatar.jpg")}
+              />
+              <AntDesign
+                name="pluscircleo"
+                size={24}
+                style={styles.addBtn}
+              />
+            </View>
             <RegistrationForm />
           </View>
         </KeyboardAvoidingView>
@@ -50,6 +63,37 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: "#FFFFFF",
+  },
+
+  img: {
+    position: "absolute",
+    alignSelf: "center",
+    top: -60,
+    width: 132,
+    height: 120,
+  },
+
+  avatar: {
+    width: 120,
+    height: 120,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 16,
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    shadowOpacity: 0.25,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 4,
+  },
+
+  addBtn: {
+    position: "absolute",
+    width: 24,
+    height: 24,
+    top: 85,
+    right: 0,
+    marginBottom: 32,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 50,
+    color: "#FF6C00",
   },
 });
 

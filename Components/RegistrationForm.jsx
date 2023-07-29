@@ -6,7 +6,7 @@ const RegistrationForm = ({onPress}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleForm = () => {
+    const formSubmit = () => {
         console.log(login);
         console.log(email);
         console.log(password);
@@ -41,17 +41,17 @@ const RegistrationForm = ({onPress}) => {
             value={password}
             onChangeText={setPassword} />
         <Pressable>
-            <Text style={styles.inputLink}>Показати</Text>
+            <Text style={styles.link}>Показати</Text>
         </Pressable>
         <Pressable
             style={styles.button}
-            onPress={handleForm}>
+            onPress={formSubmit}>
             <Text style={styles.buttonText}>Зареєстуватися</Text>
         </Pressable>
-        <View style={styles.textWrap}>
+        <View style={styles.regesterContainer}>
             <Text style={styles.text}>Вже є акаунт?</Text>
             <Pressable>
-                <Text style={styles.text}>Увійти</Text>
+                <Text style={styles.textColor}>Увійти</Text>
             </Pressable>
         </View>
     </View>
@@ -86,9 +86,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
 
-    inputLink: {
+    link: {
         position: 'absolute',
-        top: -51,
+        top: -57,
         right: 16,
         fontFamily: 'roboto-regular',
         fontSize: 16,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
     },
 
-    textWrap: {
+    regesterContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
         gap: 3,
