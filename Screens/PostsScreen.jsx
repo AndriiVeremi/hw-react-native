@@ -9,13 +9,13 @@ const PostsScreen = () => {
         <View style={styles.text}>
           <Text style={styles.title}>Публікації</Text>
         </View>
-        <Feather name="logout" size={24} color="#BDBDBD" />
+        <Feather name="log-out" size={24} color="#BDBDBD" />
       </View>
       <View style={styles.main}>
         <View style={styles.wrap}>
           <Image
             style={styles.img}
-            source={require("../assets/images/avatar.png")}
+            source={require("../assets/Images/Avatar.jpg")}
           />
           <View style={styles.mainText}>
             <Text style={styles.name}>Natali Romanova</Text>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     textAlign: "center",
-    color: " #212121",
+    color: "#212121",
   },
 
   main: {
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
 
   mainText: {
-    color: Colors.textMain,
+    color: "#212121",
     fontFamily: "Roboto",
     alignSelf: "center",
   },

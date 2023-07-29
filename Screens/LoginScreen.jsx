@@ -1,12 +1,12 @@
 import React from "react";
 import { ImageBackground, Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-// import { LoginForm } from '../Components/LoginForm';
+import LoginForm from '../Components/LoginForm';
 
-export const LoginScreen = () => {
+const LoginScreen = () => {
 
   return (
     
-    <ImageBackground source={require('../assets/images/PhotoBG.jpg')} style={styles.bgImage}>
+    <ImageBackground source={require('../assets/Images/photoBG.jpg')} style={styles.bgImage}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -23,7 +23,6 @@ export const LoginScreen = () => {
 
 const styles = StyleSheet.create({ 
     bgImage: {
-        flex: 1,
         resizeMode: 'cover',
         justifyContent: 'center',
         width: '100%',
@@ -44,3 +43,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
     }
 })
+
+export default LoginScreen;
