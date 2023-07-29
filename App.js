@@ -1,7 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { useState, useCallback } from "react";
-import { View, Text } from "react-native";
-import * as SplashScreen from "expo-splash-screen";
+import { useCallback } from "react";
+import { View } from "react-native";
 import { useFonts } from "expo-font";
 
 import RegistrationScreen from './Screens/RegistrationScreen';
@@ -27,8 +25,8 @@ export default function App() {
   }
   return (
     <View onLayout={onLayoutRootView}>
-      {/* <RegistrationScreen /> */}
-      <LoginScreen />
+      <RegistrationScreen />
+      {/* <LoginScreen /> */}
       {/* <PostsScreen /> */}
     </View>
   );
