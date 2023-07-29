@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        marginVertical: 33,
+        marginVertical: 30,
         textAlign: 'center',
         fontFamily: 'roboto-medium',
         fontSize: 30,

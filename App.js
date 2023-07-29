@@ -26,8 +26,8 @@ export default function App() {
   }
   return (
     <View onLayout={onLayoutRootView}>
-      <RegistrationScreen />
-      {/* <LoginScreen /> */}
+      {/* <RegistrationScreen /> */}
+      <LoginScreen />
       {/* <PostsScreen /> */}
     </View>
   );
