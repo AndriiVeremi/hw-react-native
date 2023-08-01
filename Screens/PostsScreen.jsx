@@ -4,35 +4,33 @@ import { MaterialIcons, AntDesign, Feather } from "@expo/vector-icons";
 
 const PostsScreen = () => {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.text}>
-            <Text style={styles.title}>Публікації</Text>
+    <View style={styles.container}>
+
+      <View style={styles.header}>
+      <Text style={styles.title}>Публікації</Text>
+      <Feather name="log-out" size={24} color="#BDBDBD" />
+      </View>
+
+      <View style={styles.main}>
+        <View style={styles.wrap}>
+          <Image
+            style={styles.img}
+            source={require("../assets/Images/Avatar.jpg")}
+          />
+          <View style={styles.mainText}>
+            <Text style={styles.name}>Natali Romanova</Text>
+            <Text style={styles.email}>email@example.com</Text>
           </View>
-          <Feather name="log-out" size={24} color="#BDBDBD" />
-        </View>
-        <View style={styles.main}>
-          <View style={styles.wrap}>
-            <Image
-              style={styles.img}
-              source={require("../assets/Images/Avatar.jpg")}
-            />
-            <View style={styles.mainText}>
-              <Text style={styles.name}>Natali Romanova</Text>
-              <Text style={styles.email}>email@example.com</Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.footer}>
-          <MaterialIcons name="grid-view" size={24} color="#212121" />
-          <Pressable style={styles.buttonLink}>
-            <AntDesign name="plus" size={24} color="white" />
-          </Pressable>
-          <Feather name="user" size={24} color="#212121" />
         </View>
       </View>
-    </SafeAreaView>
+      <View style={styles.footer}>
+        <MaterialIcons name="grid-view" size={24} color="#212121" />
+        <Pressable style={styles.buttonLink}>
+          <AntDesign name="plus" size={24} color="white" />
+        </Pressable>
+        <Feather name="user" size={24} color="#212121" />
+      </View>
+    </View>
   );
 };
 
@@ -52,16 +50,13 @@ const styles = StyleSheet.create({
     borderBottomColor: "#BDBDBD",
   },
 
-  text: {
-    marginLeft: 100,
+  title: {
+    fontFamily: "roboto-bold",
+    fontSize: 17,
+    color: "#212121",
+    marginLeft: 145,
     paddingTop: 11,
     paddingBottom: 11,
-  },
-
-  title: {
-    fontSize: 17,
-    textAlign: "center",
-    color: "#212121",
   },
 
   main: {
