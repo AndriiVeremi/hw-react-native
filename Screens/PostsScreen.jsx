@@ -4,33 +4,35 @@ import { MaterialIcons, AntDesign, Feather } from "@expo/vector-icons";
 
 const PostsScreen = () => {
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.text}>
-          <Text style={styles.title}>Публікації</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.text}>
+            <Text style={styles.title}>Публікації</Text>
+          </View>
+          <Feather name="log-out" size={24} color="#BDBDBD" />
         </View>
-        <Feather name="log-out" size={24} color="#BDBDBD" />
-      </View>
-      <View style={styles.main}>
-        <View style={styles.wrap}>
-          <Image
-            style={styles.img}
-            source={require("../assets/Images/Avatar.jpg")}
-          />
-          <View style={styles.mainText}>
-            <Text style={styles.name}>Natali Romanova</Text>
-            <Text style={styles.email}>email@example.com</Text>
+        <View style={styles.main}>
+          <View style={styles.wrap}>
+            <Image
+              style={styles.img}
+              source={require("../assets/Images/Avatar.jpg")}
+            />
+            <View style={styles.mainText}>
+              <Text style={styles.name}>Natali Romanova</Text>
+              <Text style={styles.email}>email@example.com</Text>
+            </View>
           </View>
         </View>
+        <View style={styles.footer}>
+          <MaterialIcons name="grid-view" size={24} color="#212121" />
+          <Pressable style={styles.buttonLink}>
+            <AntDesign name="plus" size={24} color="white" />
+          </Pressable>
+          <Feather name="user" size={24} color="#212121" />
+        </View>
       </View>
-      <View style={styles.footer}>
-        <MaterialIcons name="grid-view" size={24} color="#212121" />
-        <Pressable style={styles.buttonLink}>
-          <AntDesign name="plus" size={24} color="white" />
-        </Pressable>
-        <Feather name="user" size={24} color="#212121" />
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
