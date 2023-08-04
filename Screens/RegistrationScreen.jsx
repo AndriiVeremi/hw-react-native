@@ -27,7 +27,7 @@ const RegistrationScreen = () => {
             <View style={styles.img}>
               <Image
                 style={styles.avatar}
-                source={require("../assets/Images/Avatar.jpg")}
+                source={require("../assets/Images/photo.jpg")}
               />
               <AntDesign
                 name="pluscircleo"
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
 
   addBtn: {
     position: "absolute",
-    width: 24,
-    height: 24,
+    width: 25,
+    height: 25,
     top: 85,
     right: 0,
     marginBottom: 32,

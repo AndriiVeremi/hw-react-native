@@ -1,4 +1,4 @@
-import { CommentFromOther, CommentOwn } from "../Components/Comment";
+import { OtherComment, AdmComment } from "../Components/Comment";
 import InputWithButton from "../Components/CommentsInput";
 import {
     View,
@@ -15,19 +15,19 @@ import {
           <View style={styles.parent}>
             <Image style={styles.photo} source={require("../assets/Images/photoBG.jpg")} />
             <View style={{ marginTop: 32 }}>
-              <CommentFromOther
+              <OtherComment
                 avatar={require("../assets/Images/photoBG.jpg")}
                 content="Really love your most recent photo. I’ve been trying to capture the same thing for a few months and would love some tips!"
                 date="09 червня, 2020"
                 time="08:40"
               />
-              <CommentOwn
+              <AdmComment
                 avatar={require("../assets/Images/photo.jpg")}
                 content="A fast 50mm like f1.8 would help with the bokeh. I’ve been using primes as they tend to get a bit sharper images."
                 date="09 червня, 2020"
                 time="09:14"
               />
-              <CommentFromOther
+              <OtherComment
                 avatar={require("../assets/Images/photoBG.jpg")}
                 content="Thank you! That was very helpful!"
                 date="09 червня, 2020"

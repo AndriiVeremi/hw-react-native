@@ -4,7 +4,6 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  Image,
   ImageBackground,
   Pressable,
   KeyboardAvoidingView,
@@ -16,8 +15,8 @@ import {
 import { MaterialIcons, Feather } from "@expo/vector-icons";
 
 const CreatePostsScreen = () => {
-  const photoUri = false;
-  const isButtonActive = false;
+  const photoUri = true;
+  const isButtonActive = true;
 
   return (
     <KeyboardAvoidingView
@@ -26,14 +25,10 @@ const CreatePostsScreen = () => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Створити публікацію</Text>
-          </View>
-
-          <View style={styles.cameraContainer}>
+          <View style={styles.photoContainer}>
             {photoUri && (
               <ImageBackground
-                source={require("../assets/Images/photoBG.jpg")}
+                source={require("../assets/Images/img1.jpg")}
                 style={{
                   height: "100%",
                   width: "100%",
@@ -43,7 +38,7 @@ const CreatePostsScreen = () => {
                   <MaterialIcons
                     name="photo-camera"
                     size={24}
-                    // color={#BDBDBD}
+                    color="#BDBDBD"
                   />
                 </TouchableOpacity>
               </ImageBackground>
@@ -55,14 +50,14 @@ const CreatePostsScreen = () => {
                     <MaterialIcons
                       name="photo-camera"
                       size={24}
-                      // color={#BDBDBD}
+                      color="#BDBDBD"
                     />
                   </TouchableOpacity>
                 </View>
               </View>
             )}
           </View>
-          <Text style={styles.text}>Завантажте фото</Text>
+          
           {photoUri ? (
             <Text style={styles.text}>Редагувати фото</Text>
           ) : (
@@ -112,37 +107,17 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
   },
-  header: {
-    width: "100%",
-    position: "absolute",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: 60,
-    marginTop: 44,
-    paddingHorizontal: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#BDBDBD",
-  },
-  title: {
-    fontFamily: "roboto-bold",
-    fontSize: 17,
-    color: "#212121",
-    marginLeft: 100,
-    paddingTop: 11,
-    paddingBottom: 11,
-    // textAlign: "center",
-  },
-  cameraContainer: {
-    marginTop: 75,
-    position: "relative",
+  photoContainer: {
     width: "100%",
     height: 240,
-    backgroundColor: "#F6F6F6",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f6f6f6",
     borderColor: "#E8E8E8",
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 10,
+    overflow: "hidden",
   },
   camera: { flex: 1, overflow: "hidden" },
   photoView: {

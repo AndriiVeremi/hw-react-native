@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 
-export function CommentFromOther({ content, date, time, avatar }) {
+export function OtherComment ({ content, date, time, avatar }) {
   return (
     <View style={styles.person}>
       <Image style={styles.image} source={avatar} />
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export function CommentOwn({ content, date, time, avatar }) {
+export function AdmComment({ content, date, time, avatar }) {
   return (
     <View style={style.person}>
       <View style={style.text}>

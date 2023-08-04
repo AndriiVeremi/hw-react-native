@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import {
   View,
@@ -9,42 +9,18 @@ import {
 } from "react-native";
 
 const InputWithButton = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
-  const handleInputChange = (text) => {
-    setInputValue(text);
-  };
-
-  const handleButtonClick = () => {
-    // Обработка нажатия на кнопку
-    console.log("Button clicked!");
-  };
-
   return (
     <View style={{ flexDirection: "row" }}>
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
       >
-        <TextInput
-          style={styles.input}
-          placeholder="Коментувати..."
-        />
+        <TextInput style={styles.input} placeholder="Коментувати..." />
         <View style={styles.arrowContainer}>
           <Ionicons
             name="arrow-up"
             size={25}
             color="#fff"
             style={styles.arrow}
-            
           />
         </View>
       </KeyboardAvoidingView>

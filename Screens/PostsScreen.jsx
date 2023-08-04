@@ -1,62 +1,41 @@
 import React from "react";
-import { StyleSheet, Text, View, Pressable, Image } from "react-native";
-import { MaterialIcons, AntDesign, Feather } from "@expo/vector-icons";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+} from "react-native";
 
 const PostsScreen = () => {
   return (
-    <View style={styles.container}>
-
-      <View style={styles.header}>
-      <Text style={styles.title}>Публікації</Text>
-      <Feather name="log-out" size={24} color="#BDBDBD" />
-      </View>
-
-      <View style={styles.main}>
-        <View style={styles.wrap}>
-          <Image
-            style={styles.img}
-            source={require("../assets/Images/Avatar.jpg")}
-          />
-          <View style={styles.mainText}>
-            <Text style={styles.name}>Natali Romanova</Text>
-            <Text style={styles.email}>email@example.com</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.main}>
+          <View style={styles.wrap}>
+            <Image
+              style={styles.img}
+              source={require("../assets/Images/Avatar.jpg")}
+            />
+            <View style={styles.mainText}>
+              <Text style={styles.name}>Natali Romanova</Text>
+              <Text style={styles.email}>email@example.com</Text>
+            </View>
           </View>
         </View>
       </View>
-      <View style={styles.footer}>
-        <MaterialIcons name="grid-view" size={24} color="#212121" />
-        <Pressable style={styles.buttonLink}>
-          <AntDesign name="plus" size={24} color="white" />
-        </Pressable>
-        <Feather name="user" size={24} color="#212121" />
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+  },
+
   container: {
     justifyContent: "space-around",
-  },
-
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: 60,
-    marginTop: 44,
-    paddingHorizontal: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#BDBDBD",
-  },
-
-  title: {
-    fontFamily: "roboto-bold",
-    fontSize: 17,
-    color: "#212121",
-    marginLeft: 145,
-    paddingTop: 11,
-    paddingBottom: 11,
   },
 
   main: {
