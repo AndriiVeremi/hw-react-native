@@ -28,8 +28,6 @@ const Home = () => {
           height: 40,
           marginRight: "2%",
         },
-        // tabBarActiveTintColor: "#FFFFFF",
-        // tabBarActiveBackgroundColor: "#FF6C00",
         tabBarStyle: {
           paddingTop: 9,
           justifyContent: "center",

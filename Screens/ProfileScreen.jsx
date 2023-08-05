@@ -1,7 +1,6 @@
 import {
   View,
   ScrollView,
-  FlatList,
   Pressable,
   ImageBackground,
   Image,
@@ -11,7 +10,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Feather, AntDesign } from "@expo/vector-icons";
 
-const Item = () => {
+const Item = (item) => {
   const navigation = useNavigation();
 
   return (
@@ -22,26 +21,30 @@ const Item = () => {
       ></Image>
       <Text style={styles.postText}>Ліс</Text>
       <View style={styles.addInfoWrapper}>
-        <Pressable style={styles.commentLikesButton}>
+        <Pressable
+          style={styles.commentLikesButton}
+          onPress={() => navigation.navigate("Comments")}
+        >
           <Feather
             style={{ color: "#FF6C00" }}
             name="message-circle"
             size={24}
-            onPress={() => navigation.navigate("Comments")}
           />
           <Text style={{ fontSize: 16, color: "#212121" }}>3</Text>
         </Pressable>
+
         <View style={styles.commentLikesButton}>
           <Feather style={{ color: "#FF6C00" }} name="thumbs-up" size={24} />
           <Text style={{ fontSize: 16, color: "#212121" }}>135</Text>
         </View>
-        <Pressable style={styles.locationButton}>
-          <Feather
-            style={{ color: "#BDBDBD" }}
-            name="map-pin"
-            size={24}
-            onPress={() => navigation.navigate("Map")}
-          />
+
+        <Pressable
+          style={styles.locationButton}
+          onPress={() => {
+            navigation.navigate("Map");
+          }}
+        >
+          <Feather style={{ color: "#BDBDBD" }} name="map-pin" size={24} />
           <Text style={styles.locationText}>Ukraine</Text>
         </Pressable>
       </View>
@@ -77,8 +80,8 @@ const ProfileScreen = () => {
             <Feather name="log-out" size={24} color="#BDBDBD" />
           </Pressable>
           <Text style={styles.heading}>Natali Romanova</Text>
-          <Item/>
-          <Item/>
+          <Item />
+          <Item />
         </View>
       </ImageBackground>
     </ScrollView>
@@ -178,7 +181,6 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
   },
   locationText: {
-    // font-family: Roboto;
     fontSize: 16,
     color: "#212121",
     textDecorationLine: "underline",
@@ -187,9 +189,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     width: "92%",
     height: 299,
-    // justifyContent: "flex-start",
-    // alignItems: "flex-start",
-    // marginTop: 32,
     marginBottom: 32,
     marginLeft: "auto",
     marginRight: "auto",
@@ -197,8 +196,6 @@ const styles = StyleSheet.create({
   contentBlock: {
     width: "100%",
     height: 240,
-    // justifyContent: "center",
-    // alignItems: "center",
     marginBottom: 8,
     borderWidth: 1,
     borderStyle: "solid",
@@ -221,16 +218,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // width: "90%",
-    // marginBottom: 32,
   },
   contentDetail: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    // marginRight:25,
-    // width: "90%",
   },
   commentText: {
     marginLeft: 4,

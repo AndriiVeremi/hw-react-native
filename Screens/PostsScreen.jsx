@@ -10,6 +10,7 @@ import {
 import { Feather } from "@expo/vector-icons";
 
 const PostsScreen = () => {
+ 
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.container}>
@@ -53,10 +54,10 @@ const PostsScreen = () => {
                 source={require("../assets/Images/img2.jpg")}
               />
             </View>
-            <Text style={styles.itemName}>Захід на Чорному морі</Text>
+            <Text style={styles.itemName}>Захід на морі</Text>
             <View style={styles.itemInfoContent}>
               <View style={styles.itemInfo}>
-                <Feather name="message-circle" size={24} color="#BDBDBD" />
+                <Feather name="message-circle" size={24} color="#BDBDBD"/>
                 <Text style={styles.comitText}>0</Text>
               </View>
               <View style={styles.itemInfo}>
