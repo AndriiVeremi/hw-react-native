@@ -77,10 +77,10 @@ const styles = StyleSheet.create({
     marginTop: 92,
     marginBottom: 33,
     textAlign: "center",
-    fontFamily: "roboto-medium",
     fontSize: 30,
     lineHeight: 35,
     letterSpacing: 0.3,
+    fontWeight: 500,
   },
 
   input: {
@@ -91,6 +91,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: "#E8E8E8",
     borderWidth: 1,
+    padding: 16,
+    fontSize: 16,
   },
 
   link: {

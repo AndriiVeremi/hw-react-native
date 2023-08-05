@@ -8,12 +8,10 @@ const MapScreen = () => {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        // region={{ }}
         mapType="standard"
       >
         <Marker
           title="I am here"
-        //   coordinate={{  }}
           description="Hello"
         />
       </MapView>

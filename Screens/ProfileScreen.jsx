@@ -15,35 +15,35 @@ const Item = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.contentContainer}>
-      <View style={styles.contentBlock}>
-        <Image
-          style={styles.contentImg}
-          source={require("../assets/Images/img1.jpg")}
-        />
-      </View>
-      <Text style={styles.contentName}>Ліс</Text>
-      <View style={styles.contentDetails}>
-        <View style={styles.contentDetail}>
+    <View style={styles.post}>
+      <Image
+        style={styles.postImage}
+        source={require("../assets/Images/img1.jpg")}
+      ></Image>
+      <Text style={styles.postText}>Ліс</Text>
+      <View style={styles.addInfoWrapper}>
+        <Pressable style={styles.commentLikesButton}>
           <Feather
+            style={{ color: "#FF6C00" }}
             name="message-circle"
             size={24}
-            color="#FF6C00"
             onPress={() => navigation.navigate("Comments")}
           />
-          <Text style={styles.commentText}>50</Text>
-          <Feather name="thumbs-up" size={24} color="#FF6C00" />
-          <Text style={styles.commentText}>200</Text>
+          <Text style={{ fontSize: 16, color: "#212121" }}>3</Text>
+        </Pressable>
+        <View style={styles.commentLikesButton}>
+          <Feather style={{ color: "#FF6C00" }} name="thumbs-up" size={24} />
+          <Text style={{ fontSize: 16, color: "#212121" }}>135</Text>
         </View>
-        <View style={styles.contentDetail}>
+        <Pressable style={styles.locationButton}>
           <Feather
+            style={{ color: "#BDBDBD" }}
             name="map-pin"
             size={24}
-            color="#BDBDBD"
             onPress={() => navigation.navigate("Map")}
           />
-          <Text style={styles.mapText}>Poland</Text>
-        </View>
+          <Text style={styles.locationText}>Ukraine</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -77,27 +77,8 @@ const ProfileScreen = () => {
             <Feather name="log-out" size={24} color="#BDBDBD" />
           </Pressable>
           <Text style={styles.heading}>Natali Romanova</Text>
-
-          <FlatList
-              // data={fetchedPosts}
-              renderItem={({ item }) => (
-                <Item
-                  title={item.name}
-                  commentsAmount={item.comments.length}
-                  imageUrl={item.imageUrl}
-                  location={item.location.name}
-                  likesAmount={item.likes}
-                  onPressComments={() => {
-                    navigation.navigate("Comments", { postId: item.id });
-                  }}
-                  onPressMap={() => {
-                    navigation.navigate("Map", { location: item.location.geo.coords });
-                  }}
-                />
-              )}
-              keyExtractor={(item) => item.id}
-              scrollEnabled={false}
-            />
+          <Item/>
+          <Item/>
         </View>
       </ImageBackground>
     </ScrollView>

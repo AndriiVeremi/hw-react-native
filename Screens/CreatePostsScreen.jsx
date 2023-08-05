@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import {
   Text,
   TextInput,
@@ -15,6 +16,7 @@ import {
 import { MaterialIcons, Feather } from "@expo/vector-icons";
 
 const CreatePostsScreen = () => {
+  const navigation = useNavigation();
   const photoUri = true;
   const isButtonActive = true;
 
@@ -57,7 +59,7 @@ const CreatePostsScreen = () => {
               </View>
             )}
           </View>
-          
+
           {photoUri ? (
             <Text style={styles.text}>Редагувати фото</Text>
           ) : (
@@ -75,6 +77,9 @@ const CreatePostsScreen = () => {
           <Pressable
             style={isButtonActive ? styles.activeButton : styles.disabledButton}
             disabled={isButtonActive ? false : true}
+            onPress={() => {
+              navigation.navigate("Posts");
+            }}
           >
             <Text
               style={
@@ -86,7 +91,12 @@ const CreatePostsScreen = () => {
               Опублікувати
             </Text>
           </Pressable>
-          <Pressable style={styles.deleteWrapper}>
+          <Pressable
+            style={styles.deleteWrapper}
+            onPress={() => {
+              navigation.navigate("Posts");
+            }}
+          >
             <Feather style={styles.deleteIcon} name="trash-2" size={24} />
           </Pressable>
         </View>
@@ -119,18 +129,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     overflow: "hidden",
   },
-  camera: { flex: 1, overflow: "hidden" },
-  photoView: {
-    flex: 1,
-    backgroundColor: "transparent",
-    justifyContent: "flex-end",
-  },
-  flipContainer: {
-    position: "absolute",
-    bottom: 10,
-    right: 10,
-    alignSelf: "flex-end",
-  },
   photoButton: {
     position: "absolute",
     top: "50%",
@@ -144,26 +142,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  camera: { flex: 1, overflow: "hidden" },
+  photoView: {
+    flex: 1,
+    backgroundColor: "transparent",
+    justifyContent: "flex-end",
+  },
   text: {
     alignSelf: "flex-start",
     marginBottom: 48,
     color: "#BDBDBD",
-
     fontSize: 16,
-  },
-  buttonTextActive: {
-    fontSize: 16,
-    color: "#ffffff",
-  },
-  buttonTextDisabled: {
-    fontSize: 16,
-    color: "#BDBDBD",
-  },
-  inputWrapper: {
-    position: "relative",
-    width: "100%",
-    height: 50,
-    marginBottom: 16,
   },
   input: {
     width: "100%",
@@ -173,6 +162,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     color: "#212121",
     fontSize: 16,
+  },
+  inputWrapper: {
+    position: "relative",
+    width: "100%",
+    height: 50,
+    marginBottom: 16,
   },
   inputIcon: {
     color: "#BDBDBD",
@@ -206,6 +201,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F6F6",
     borderRadius: 100,
   },
+  buttonTextActive: {
+    fontSize: 16,
+    color: "#ffffff",
+  },
+  buttonTextDisabled: {
+    fontSize: 16,
+    color: "#BDBDBD",
+  },
   deleteWrapper: {
     display: "flex",
     alignItems: "center",
@@ -214,7 +217,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     backgroundColor: "#F6F6F6",
-    marginTop: 150,
+    marginTop: 130,
   },
   deleteIcon: {
     color: "#BDBDBD",

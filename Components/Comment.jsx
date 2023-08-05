@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 
-export function OtherComment ({ content, date, time, avatar }) {
+export function OtherComment() {
   return (
     <View style={styles.person}>
-      <Image style={styles.image} source={avatar} />
+      <Image
+        style={styles.imgAvatar}
+        source={require("../assets/Images/avatar.jpg")}
+      />
       <View style={styles.text}>
-        <Text style={styles.content}>{content}</Text>
-        <Text style={styles.dateTime}>
-          {date} | {time}
-        </Text>
+        <Text style={styles.content}>Текст</Text>
+        <Text style={styles.dateTime}>25.02.11 | 12:00</Text>
       </View>
     </View>
   );
@@ -49,16 +50,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export function AdmComment({ content, date, time, avatar }) {
+export function AdmComment() {
   return (
     <View style={style.person}>
       <View style={style.text}>
-        <Text style={style.content}>{content}</Text>
-        <Text style={style.dateTime}>
-          {date} | {time}
-        </Text>
+        <Text style={style.content}>Текст</Text>
+        <Text style={styles.dateTime}>25.02.11 | 12:00</Text>
       </View>
-      <Image style={style.image} source={avatar} />
+      <Image
+        style={styles.imgAvatar}
+        source={require("../assets/Images/avatar.jpg")}
+      />
     </View>
   );
 }

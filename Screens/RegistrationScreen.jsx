@@ -57,20 +57,23 @@ const styles = StyleSheet.create({
   },
 
   container: {
+    position: "relative",
     marginTop: "auto",
     width: "100%",
     height: 549,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: "#FFFFFF",
+    marginTop: "auto",
   },
 
   img: {
     position: "absolute",
     alignSelf: "center",
     top: -60,
-    width: 132,
+    width: 120,
     height: 120,
+    
   },
 
   avatar: {
@@ -88,8 +91,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: 25,
     height: 25,
-    top: 85,
-    right: 0,
+    top: 80,
+    right: -12,
     marginBottom: 32,
     backgroundColor: "#FFFFFF",
     borderRadius: 50,
