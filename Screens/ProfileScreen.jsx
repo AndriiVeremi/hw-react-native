@@ -60,15 +60,15 @@ const ProfileScreen = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <ImageBackground
-        source={require("../assets/Images/photoBG.jpg")}
-        style={{
-          height: "100%",
-          width: "100%",
-        }}
-      >
-        <View style={styles.box}>
+    <ImageBackground
+      source={require("../assets/Images/photoBG.jpg")}
+      style={{
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <ScrollView>
+        <View style={styles.container}>
           <View style={styles.img}>
             <Image
               style={styles.avatar}
@@ -83,8 +83,8 @@ const ProfileScreen = () => {
           <Item />
           <Item />
         </View>
-      </ImageBackground>
-    </ScrollView>
+      </ScrollView>
+    </ImageBackground>
   );
 };
 
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  box: {
+  container: {
     position: "relative",
     width: "100%",
     height: "100%",

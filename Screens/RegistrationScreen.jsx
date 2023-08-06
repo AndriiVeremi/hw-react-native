@@ -18,27 +18,23 @@ const RegistrationScreen = () => {
       source={require("../assets/Images/photoBG.jpg")}
       style={styles.bgImage}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.keyboardAvoidingView}
-        >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.keyboardAvoidingView}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.container}>
             <View style={styles.img}>
               <Image
                 style={styles.avatar}
                 source={require("../assets/Images/photo.jpg")}
               />
-              <AntDesign
-                name="pluscircleo"
-                size={24}
-                style={styles.addBtn}
-              />
+              <AntDesign name="pluscircleo" size={24} style={styles.addBtn} />
             </View>
             <RegistrationForm />
           </View>
-        </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 };
@@ -73,7 +69,6 @@ const styles = StyleSheet.create({
     top: -60,
     width: 120,
     height: 120,
-    
   },
 
   avatar: {

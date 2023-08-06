@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,10 +8,6 @@ import 'react-native-gesture-handler';
 
 import RegistrationScreen from './Screens/RegistrationScreen';
 import LoginScreen from './Screens/LoginScreen';
-import PostsScreen from "./Screens/PostsScreen";
-
-import CreatePostsScreen from "./Screens/CreatePostsScreen";
-import CommentsScreen from "./Screens/CommentsScreen";
 import Home from "./Screens/Home";
 
 const UseStack = createStackNavigator();
@@ -53,7 +49,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {

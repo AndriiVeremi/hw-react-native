@@ -17,16 +17,16 @@ const LoginScreen = () => {
       source={require("../assets/Images/photoBG.jpg")}
       style={styles.bgImage}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={styles.keyboardAvoidingView}
         >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.container}>
             <LoginForm />
           </View>
+          </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
     </ImageBackground>
   );
 };
