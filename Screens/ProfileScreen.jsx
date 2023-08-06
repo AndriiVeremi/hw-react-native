@@ -185,7 +185,6 @@ const styles = StyleSheet.create({
     color: "#212121",
     textDecorationLine: "underline",
   },
-
   contentContainer: {
     width: "92%",
     height: 299,
