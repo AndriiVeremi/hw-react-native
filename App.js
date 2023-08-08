@@ -1,7 +1,7 @@
-import { useCallback } from "react";
+// import { useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
+// import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
@@ -9,8 +9,13 @@ import 'react-native-gesture-handler';
 import RegistrationScreen from './Screens/RegistrationScreen';
 import LoginScreen from './Screens/LoginScreen';
 import Home from "./Screens/Home";
+import Profile from "./Screens/ProfileScreen";
+import Comments from "./Screens/CommentsScreen";
+import Map from "./Screens/MapScreen";
+import Posts from "./Screens/PostsScreen";
 
-const UseStack = createStackNavigator();
+
+const MainStack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -19,33 +24,27 @@ export default function App() {
     "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
   });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (fontsLoaded) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded]);
 
   if (!fontsLoaded) {
     return null;
   }
+
   return (
     <NavigationContainer style={styles.container}>
-      <UseStack.Navigator initialRouteName="Login">
-        <UseStack.Screen 
-          name="Registration" 
-          component={RegistrationScreen}
-          options={{ headerShown: false }} />
-        <UseStack.Screen 
-          name="Login" 
-          component={LoginScreen}
-          options={{ headerShown: false }} />
-        <UseStack.Screen 
-        name="Home" 
-        component={Home}
-        options={{ 
-          headerShown: false,
-          }} />
-      </UseStack.Navigator>
+      <MainStack.Navigator initialRouteName="Login">
+        <MainStack.Screen name="Registration" component={RegistrationScreen} options={{ headerShown: false }} />
+        <MainStack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <MainStack.Screen name="Home" component={Home} options={{ headerShown: false, }} />
+        <MainStack.Screen name="Comments" component={Comments} />
+        <MainStack.Screen name="Map" component={Map} />
+        <MainStack.Screen name="Profile" component={Profile} />
+        <MainStack.Screen name="Posts" component={Posts} />
+      </MainStack.Navigator>
     </NavigationContainer>
   );
 }
