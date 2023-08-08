@@ -7,10 +7,12 @@ import {
   View,
   Image,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Feather } from "@expo/vector-icons";
 
+
 const PostsScreen = () => {
- 
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.container}>
@@ -35,11 +37,15 @@ const PostsScreen = () => {
             <Text style={styles.itemName}>Ліс</Text>
             <View style={styles.itemInfoContent}>
               <View style={styles.itemInfo}>
-                <Feather name="message-circle" size={24} color="#BDBDBD" />
+                <Feather name="message-circle" size={24} color="#BDBDBD" onPress={() => {
+                navigation.navigate("Comments");
+              }}/>
                 <Text style={styles.comitText}>0</Text>
               </View>
               <View style={styles.itemInfo}>
-                <Feather name="map-pin" size={24} color="#BDBDBD" />
+                <Feather name="map-pin" size={24} color="#BDBDBD"  onPress={() => {
+                navigation.navigate("Map");
+              }}/>
                 <Text style={styles.mapText}>
                   Ivano-Frankivs'k Region, Ukraine
                 </Text>

@@ -209,7 +209,7 @@ const CreatePostsScreen = () => {
           <Pressable
             style={styles.deleteWrapper}
             onPress={() => {
-              resetState();
+              reset();
               navigation.navigate("Posts");
             }}
           >
