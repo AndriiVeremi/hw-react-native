@@ -27,6 +27,7 @@ const PostsScreen = () => {
               <Text style={styles.email}>email@example.com</Text>
             </View>
           </View>
+
           <View style={styles.item}>
             <View style={styles.wrapperImg}>
               <Image
@@ -40,7 +41,7 @@ const PostsScreen = () => {
                 <Feather name="message-circle" size={24} color="#BDBDBD" onPress={() => {
                 navigation.navigate("Comments");
               }}/>
-                <Text style={styles.comitText}>0</Text>
+                <Text style={styles.comitText}>3</Text>
               </View>
               <View style={styles.itemInfo}>
                 <Feather name="map-pin" size={24} color="#BDBDBD"  onPress={() => {

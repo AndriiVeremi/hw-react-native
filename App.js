@@ -24,12 +24,6 @@ export default function App() {
     "roboto-regular": require("./assets/fonts/Roboto-Regular.ttf"),
   });
 
-  // const onLayoutRootView = useCallback(async () => {
-  //   if (fontsLoaded) {
-  //     await SplashScreen.hideAsync();
-  //   }
-  // }, [fontsLoaded]);
-
   if (!fontsLoaded) {
     return null;
   }
