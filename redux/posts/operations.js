@@ -1,6 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { doc, getDoc, arrayUnion, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import {
+  updateProfile,
+} from "firebase/auth";
 import { auth, db, storage } from "../../config.js";
 
 export const getPosts = createAsyncThunk("posts/fetchAll", async (userId, thunkAPI) => {
@@ -23,7 +26,7 @@ export const getPosts = createAsyncThunk("posts/fetchAll", async (userId, thunkA
 });
 
 export const createPost = createAsyncThunk("posts/create", async ({ userId, newPost }, thunkAPI) => {
-  try {
+  try {  
     const img = await fetch(newPost.imageUrl);
     const bytes = await img.blob();
     const randomNumber = Date.now();
@@ -47,13 +50,13 @@ export const addComment = createAsyncThunk("posts/addComment", async ({ userId, 
    const docRef = doc(db, "posts", userId);
     const docSnap = await getDoc(docRef);
     const allPosts = docSnap.data().posts;
-    const { photoURL } = auth.currentUser;
+    // const { photoURL } = auth.currentUser;
     const updatedPosts = allPosts.map((post) => {
       if (post.id === postId) {
-        console.log(post);
-        post.comments.push({ ...newComment, author: photoURL });
-        // post.comments.push({ ...newComment});
-        // console.log(photoURL)
+        // console.log(post);
+        // post.comments.push({ ...newComment, author: photoURL });
+        post.comments.push({ ...newComment});
+        console.log(auth.currentUser)
       }
       return post;
     });

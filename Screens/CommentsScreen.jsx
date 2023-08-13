@@ -62,12 +62,12 @@ const CommentsScreen = ({ route }) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         {filteredPost && (
           <View style={styles.container}>
+             <Image source={{ uri: imageUrl }} style={styles.image}></Image>
             <ScrollView>
-              <Image source={{ uri: imageUrl }} style={styles.image}></Image>
               <FlatList
                 data={comments}
                 renderItem={({ item }) => (
-                  <Item authorProfilePic={item.photoURL} text={item.text} date={getDate(item.id)} />
+                  <Item authorProfilePic={item.author} text={item.text} date={getDate(item.id)} />
                 )}
                 keyExtractor={(item) => item.id}
                 scrollEnabled={false}
@@ -143,14 +143,12 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   text: {
-    // font-family: Roboto;
     fontSize: 13,
     color: "#212121",
     marginBottom: 8,
     width: "100%",
   },
   date: {
-    // font-family: Roboto;
     fontSize: 10,
     color: "#BDBDBD",
   },
