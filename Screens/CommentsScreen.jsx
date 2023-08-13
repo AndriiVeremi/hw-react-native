@@ -1,101 +1,105 @@
-import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAllPosts } from "../redux/posts/selectors";
+import { selectUserId } from "../redux/auth/selectors";
+import { addComment } from "../redux/posts/operations";
 import {
+  StyleSheet,
   View,
   Image,
-  StyleSheet,
+  FlatList,
+  Text,
+  TextInput,
+  Pressable,
+  ScrollView,
+  KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  TextInput,
-  KeyboardAvoidingView,
-  Text,
-  ScrollView,
+  Platform,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-const CommentsScreen = () => {
+const Item = ({ authorProfilePic, text, date }) => (
+  <View style={styles.commentWrapper}>
+    <Image source={{ uri: authorProfilePic }} style={styles.profileImg}></Image>
+    <View style={styles.textWrapper}>
+      <Text style={styles.text}>{text}</Text>
+      <Text style={styles.date}>{date}</Text>
+    </View>
+  </View>
+);
+
+const CommentsScreen = ({ route }) => {
+  const { postId } = route.params;
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState("");
+  const allPosts = useSelector(selectAllPosts);
+  const userId = useSelector(selectUserId);
+  const filteredPost = allPosts.filter((post) => post.id === postId)[0];
+  const imageUrl = filteredPost.imageUrl;
+  const comments = filteredPost.comments;
+  const photoURL = filteredPost.photoURL;
+
+  const getDate = (dateInMs) => {
+    const date = new Date(Number(dateInMs));
+    return date.toLocaleString("uk-UA", { timeZone: "UTC" });
+  };
+
+  const handleComment = () => {
+    if (!inputValue) return;
+    dispatch(
+      addComment({
+        userId,
+        postId,
+        newComment: { text: inputValue, id: Date.now() },
+      })
+    );
+    setInputValue("");
+  };
+
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-    >
+    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-        <ScrollView>
-          <Image
-            style={styles.img}
-            source={require("../assets/Images/img1.jpg")}
-          />
+        {filteredPost && (
+          <View style={styles.container}>
+            <ScrollView>
+              <Image source={{ uri: imageUrl }} style={styles.image}></Image>
+              <FlatList
+                data={comments}
+                renderItem={({ item }) => (
+                  <Item authorProfilePic={item.photoURL} text={item.text} date={getDate(item.id)} />
+                )}
+                keyExtractor={(item) => item.id}
+                scrollEnabled={false}
+              />
+            </ScrollView>
 
-          <View style={styles.commentWrapper}>
-            <Image
-              style={styles.avatarUser}
-              source={require("../assets/Images/avatarUser.jpg")}
-            />
-            <View style={{ ...styles.comment, marginLeft: 44 }}>
-              <Text style={styles.commentText}>
-                Really love your most recent photo. I’ve been trying to capture
-                the same thing for a few months and would love some tips!
-              </Text>
-              <Text style={{ ...styles.dataText, textAlign: "right" }}>
-                09 червня, 2020 | 08:40
-              </Text>
+            <View style={styles.inputWrapper}>
+              <TextInput
+                value={inputValue}
+                onChangeText={setInputValue}
+                style={styles.input}
+                placeholder="Коментувати..."
+              />
+              <Pressable style={styles.inputButton} onPress={handleComment}>
+                <Feather
+                  name="arrow-up"
+                  size={34}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    right: 8,
+                    width: 34,
+                    height: 34,
+                    borderRadius: 50,
+                    backgroundColor: "#FF6C00",
+                    color: "#FFFFFF",
+                  }}
+                />
+              </Pressable>
             </View>
           </View>
-
-          <View style={styles.commentWrapper}>
-            <Image
-              style={styles.avatar}
-              source={require("../assets/Images/avatar.jpg")}
-            />
-            <View style={{ ...styles.comment, marginRight: 44 }}>
-              <Text style={styles.commentText}>
-                A fast 50mm like f1.8 would help with the bokeh. I’ve been using
-                primes as they tend to get a bit sharper images.
-              </Text>
-              <Text style={{ ...styles.dataText, textAlign: "left" }}>
-                09 червня, 2020 | 09:14
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.commentWrapper}>
-            <Image
-              style={styles.avatarUser}
-              source={require("../assets/Images/avatarUser.jpg")}
-            />
-            <View style={{ ...styles.comment, marginLeft: 44 }}>
-              <Text style={styles.commentText}>
-              Thank you! That was very helpful!
-              </Text>
-              <Text style={{ ...styles.dataText, textAlign: "right" }}>
-                09 червня, 2020 | 09:20
-              </Text>
-            </View>
-          </View>
-          </ScrollView>
-          
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder="Коментувати..."
-              placeholderTextColor="#BDBDBD"
-            />
-            <Feather
-              name="arrow-up"
-              size={34}
-              style={{
-                position: "absolute",
-                top: 8,
-                right: 8,
-                width: 34,
-                height: 34,
-                borderRadius: 50,
-                backgroundColor: "#FF6C00",
-                color: "#FFFFFF",
-              }}
-            />
-          </View>
-        </View>
+        )}
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
@@ -103,78 +107,75 @@ const CommentsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
-    marginVertical: 40,
-    justifyContent: "center",
-    alignItems: "center",
+    flex: 1,
+    height: "100%",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    backgroundColor: "#FFFFFF",
+    paddingTop: 32,
+    paddingBottom: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
-  img: {
-    marginBottom: 32,
+  image: {
     width: "100%",
     height: 240,
-    backgroundColor: "#f6f6f6",
-    borderColor: "#fff",
-    borderWidth: 1,
     borderRadius: 8,
-    overflow: "hidden",
+    marginBottom: 32,
   },
   commentWrapper: {
-    width: "96%",
-    justifyContent: "space-between",
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
     marginBottom: 24,
   },
-  avatarUser: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: 28,
+  profileImg: {
     height: 28,
-    borderRadius: 50,
-  },
-  avatar: {
-    position: "absolute",
-    top: 0,
-    right: -10,
     width: 28,
-    height: 28,
-    borderRadius: 50,
+    borderRadius: 10,
+    marginRight: 16,
   },
-  comment: {
-    width: "90%",
-    padding: 16,
-    borderTopRightRadius: 6,
-    borderBottomLeftRadius: 6,
-    borderBottomRightRadius: 6,
+  textWrapper: {
+    width: "100%",
     backgroundColor: "#00000008",
+    borderRadius: 6,
+    borderBottomLeftRadius: 0,
+    padding: 16,
   },
-  commentText: {
-    marginBottom: 8,
-    fontFamily: "roboto-regular",
+  text: {
+    // font-family: Roboto;
     fontSize: 13,
-    lineHeight: 18,
     color: "#212121",
+    marginBottom: 8,
+    width: "100%",
   },
-  dataText: {
-    fontFamily: "roboto-regular",
+  date: {
+    // font-family: Roboto;
     fontSize: 10,
     color: "#BDBDBD",
-    textAlign: "right",
-  },
-  form: {
-    width: "92%",
   },
   input: {
-    height: 50,
     width: "100%",
-    marginBottom: 16,
-    padding: 10,
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "#E8E8E8",
-    borderRadius: 25,
+    height: 50,
     backgroundColor: "#F6F6F6",
+    borderColor: "#E8E8E8",
+    borderWidth: 1,
+    borderRadius: 100,
+    padding: 16,
     fontSize: 16,
-    fontFamily: "roboto-regular",
+  },
+  inputWrapper: {
+    width: "100%",
+    height: 60,
+    paddingTop: 10,
+    position: "relative",
+  },
+  inputButton: {
+    position: "absolute",
+    width: 34,
+    height: 34,
+    bottom: 8,
+    right: 8,
   },
 });
 

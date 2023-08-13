@@ -1,51 +1,31 @@
-import {
-  View,
-  ScrollView,
-  Pressable,
-  ImageBackground,
-  Image,
-  Text,
-  StyleSheet,
-} from "react-native";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { selectUserPhoto, selectUserLogin } from "../redux/auth/selectors";
+import { logout } from "../redux/auth/operations";
+import { selectAllPosts } from "../redux/posts/selectors";
+import { View, ScrollView, Pressable, ImageBackground, Image, Text, StyleSheet, FlatList } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
 
-const Item = (item) => {
-  const navigation = useNavigation();
-
+const Item = ({ title, commentsAmount, location, imageUrl, likesAmount, onPressComments, onPressMap }) => {
   return (
     <View style={styles.post}>
-      <Image
-        style={styles.postImage}
-        source={require("../assets/Images/img1.jpg")}
-      ></Image>
-      <Text style={styles.postText}>Ліс</Text>
+      <Image style={styles.postImage} source={{ uri: imageUrl }}></Image>
+      <Text style={styles.postText}>{title}</Text>
       <View style={styles.addInfoWrapper}>
-        <Pressable
-          style={styles.commentLikesButton}
-          onPress={() => navigation.navigate("Comments")}
-        >
-          <Feather
-            style={{ color: "#FF6C00" }}
-            name="message-circle"
-            size={24}
-          />
-          <Text style={{ fontSize: 16, color: "#212121" }}>3</Text>
+        <Pressable style={styles.commentLikesButton} onPress={() => onPressComments()}>
+          <Feather style={{ color: "#FF6C00" }} name="message-circle" size={24} />
+          <Text style={{ fontSize: 16, color: "#212121" }}>{commentsAmount}</Text>
         </Pressable>
 
         <View style={styles.commentLikesButton}>
           <Feather style={{ color: "#FF6C00" }} name="thumbs-up" size={24} />
-          <Text style={{ fontSize: 16, color: "#212121" }}>135</Text>
+          <Text style={{ fontSize: 16, color: "#212121" }}>{likesAmount}</Text>
         </View>
 
-        <Pressable
-          style={styles.locationButton}
-          onPress={() => {
-            navigation.navigate("Map");
-          }}
-        >
+        <Pressable style={styles.locationButton} onPress={() => onPressMap()}>
           <Feather style={{ color: "#BDBDBD" }} name="map-pin" size={24} />
-          <Text style={styles.locationText}>Ukraine</Text>
+          <Text style={styles.locationText}>{location}</Text>
         </Pressable>
       </View>
     </View>
@@ -53,9 +33,14 @@ const Item = (item) => {
 };
 
 const ProfileScreen = () => {
+  const profilePhoto = useSelector(selectUserPhoto);
+  const login = useSelector(selectUserLogin);
+  const fetchedPosts = useSelector(selectAllPosts);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
+    dispatch(logout());
     navigation.navigate("Login");
   };
 
@@ -70,18 +55,35 @@ const ProfileScreen = () => {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.img}>
-            <Image
-              style={styles.avatar}
-              source={require("../assets/Images/photo.jpg")}
-            />
+            {profilePhoto && <Image source={{ uri: profilePhoto }} style={styles.avatar}></Image>}
             <AntDesign name="pluscircleo" size={24} style={styles.addBtn} />
           </View>
           <Pressable style={styles.logoutIcon} onPress={handleLogout}>
             <Feather name="log-out" size={24} color="#BDBDBD" />
           </Pressable>
-          <Text style={styles.heading}>Natali Romanova</Text>
-          <Item />
-          <Item />
+          <Text style={styles.heading}>{login}</Text>
+          {fetchedPosts.length > 0 && (
+            <FlatList
+              data={fetchedPosts}
+              renderItem={({ item }) => (
+                <Item
+                  title={item.name}
+                  commentsAmount={item.comments.length}
+                  imageUrl={item.imageUrl}
+                  location={item.location.name}
+                  likesAmount={item.likes}
+                  onPressComments={() => {
+                    navigation.navigate("Comments", { postId: item.id });
+                  }}
+                  onPressMap={() => {
+                    navigation.navigate("Map", { location: item.location.geo.coords });
+                  }}
+                />
+              )}
+              keyExtractor={(item) => item.id}
+              scrollEnabled={false}
+            />
+          )}
         </View>
       </ScrollView>
     </ImageBackground>
@@ -90,12 +92,10 @@ const ProfileScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  container: {
     position: "relative",
     width: "100%",
     height: "100%",
+    minHeight: 650,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     backgroundColor: "white",

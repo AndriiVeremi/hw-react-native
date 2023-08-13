@@ -33,9 +33,7 @@ const MapScreen = () => {
         }}
         showsUserLocation={true}
       >
-        {location && (
-          <Marker title="I am here" coordinate={location} description="Hello" />
-        )}
+        {location && <Marker title="I am here" coordinate={location} description="Hello" />}
       </MapView>
     </View>
   );

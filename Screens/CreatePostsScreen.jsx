@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost } from "../redux/posts/operations";
+import { selectUserId } from "../redux/auth/selectors";
+
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import * as Location from "expo-location";
@@ -18,8 +22,6 @@ import {
   Platform,
 } from "react-native";
 
-
-
 const CreatePostsScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
@@ -31,6 +33,8 @@ const CreatePostsScreen = () => {
   const [isBtnActive, setBtnActive] = useState(false);
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const userId = useSelector(selectUserId);
 
   useEffect(() => {
     (async () => {
@@ -83,8 +87,9 @@ const CreatePostsScreen = () => {
       likes: 0,
       comments: [],
     };
-    
-    console.log("тут маю задіспатчити пост newPost")
+
+    dispatch(createPost({ userId, newPost }));
+    console.log("тут діспатчу пост");
     reset();
   };
 
@@ -93,10 +98,7 @@ const CreatePostsScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-    >
+    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.photoContainer}>
@@ -114,11 +116,7 @@ const CreatePostsScreen = () => {
                     setPhotoUri(null);
                   }}
                 >
-                  <MaterialIcons
-                    name="photo-camera"
-                    size={24}
-                    color="#BDBDBD"
-                  />
+                  <MaterialIcons name="photo-camera" size={24} color="#BDBDBD" />
                 </TouchableOpacity>
               </ImageBackground>
             )}
@@ -130,17 +128,11 @@ const CreatePostsScreen = () => {
                     style={styles.flipContainer}
                     onPress={() => {
                       setType(
-                        type === Camera.Constants.Type.back
-                          ? Camera.Constants.Type.front
-                          : Camera.Constants.Type.back
+                        type === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back
                       );
                     }}
                   >
-                    <MaterialIcons
-                      name="flip-camera-android"
-                      size={24}
-                      color="#BDBDBD"
-                    />
+                    <MaterialIcons name="flip-camera-android" size={24} color="#BDBDBD" />
                   </TouchableOpacity>
 
                   <TouchableOpacity
@@ -153,11 +145,7 @@ const CreatePostsScreen = () => {
                       }
                     }}
                   >
-                    <MaterialIcons
-                      name="photo-camera"
-                      size={24}
-                      color="#BDBDBD"
-                    />
+                    <MaterialIcons name="photo-camera" size={24} color="#BDBDBD" />
                   </TouchableOpacity>
                 </View>
               </Camera>
@@ -169,12 +157,7 @@ const CreatePostsScreen = () => {
           ) : (
             <Text style={styles.text}>Завантажте фото</Text>
           )}
-          <TextInput
-            style={styles.input}
-            value={name}
-            onChangeText={setName}
-            placeholder="Назва..."
-          ></TextInput>
+          <TextInput style={styles.input} value={name} onChangeText={setName} placeholder="Назва..."></TextInput>
 
           <View style={styles.inputWrapper}>
             <TextInput
@@ -192,11 +175,7 @@ const CreatePostsScreen = () => {
             disabled={isBtnActive ? false : true}
           >
             <Text
-              style={
-                isBtnActive
-                  ? styles.buttonTextActive
-                  : styles.buttonTextDisabled
-              }
+              style={isBtnActive ? styles.buttonTextActive : styles.buttonTextDisabled}
               onPress={() => {
                 onSubmit();
                 navigation.navigate("Posts");
@@ -246,7 +225,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  camera: { flex: 1, overflow: "hidden" },
+  camera: {
+    flex: 1,
+    overflow: "hidden",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#E8E8E8",
+  },
 
   photoView: {
     flex: 1,
