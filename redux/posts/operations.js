@@ -50,7 +50,7 @@ export const addComment = createAsyncThunk("posts/addComment", async ({ userId, 
     // const { photoURL } = auth.currentUser;
     const updatedPosts = allPosts.map((post) => {
       if (post.id === postId) {
-        // console.log(post);
+        console.log(post);
         // post.comments.push({ ...newComment, author: photoURL });
         post.comments.push({ ...newComment});
         console.log(auth.currentUser)
