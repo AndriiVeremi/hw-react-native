@@ -1,9 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { doc, getDoc, arrayUnion, updateDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
-import {
-  updateProfile,
-} from "firebase/auth";
 import { auth, db, storage } from "../../config.js";
 
 export const getPosts = createAsyncThunk("posts/fetchAll", async (userId, thunkAPI) => {
