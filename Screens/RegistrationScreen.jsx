@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: "absolute",
-    borderWidth: 1,
+    borderWidth: 0,
     borderRadius: 12,
     backgroundColor: "#FFFFFF",
     width: 26,
