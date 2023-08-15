@@ -38,7 +38,6 @@ const CommentsScreen = ({ route }) => {
   const filteredPost = allPosts.filter((post) => post.id === postId)[0];
   const imageUrl = filteredPost.imageUrl;
   const comments = filteredPost.comments;
-  const photoURL = filteredPost.photoURL;
 
   const getDate = (dateInMs) => {
     const date = new Date(Number(dateInMs));
