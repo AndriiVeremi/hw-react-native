@@ -209,7 +209,6 @@ const styles = StyleSheet.create({
   contentName: {
     marginBottom: 8,
     fontSize: 16,
-    fontFamily: "Roboto-Medium",
     color: "#212121",
   },
   contentDetails: {
@@ -228,13 +227,11 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     marginRight: 20,
     fontSize: 16,
-    fontFamily: "Roboto-Regular",
     color: "#212121",
   },
   mapText: {
     marginLeft: 4,
     fontSize: 16,
-    fontFamily: "Roboto-Regular",
     color: "#212121",
     textDecorationLine: "underline",
   },

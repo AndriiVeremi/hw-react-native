@@ -105,12 +105,10 @@ const styles = StyleSheet.create({
   },
   profileTextWrapper: {},
   profileName: {
-    // font-family: Roboto;
     fontSize: 13,
     fontWeight: 700,
   },
   profileEmail: {
-    // font-family: Roboto;
     fontSize: 11,
   },
   postImage: {
@@ -120,7 +118,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   postText: {
-    // font-family: Roboto;
     fontSize: 16,
     fontWeight: 500,
     marginBottom: 8,
@@ -142,7 +139,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   commentText: {
-    // font-family: Roboto;
     fontSize: 16,
     color: "#BDBDBD",
   },
@@ -155,106 +151,10 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
   },
   locationText: {
-    // font-family: Roboto;
     fontSize: 16,
     color: "#212121",
     textDecorationLine: "underline",
   },
 });
-
-// const styles = StyleSheet.create({
-//   safeArea: {
-//     flex: 1,
-//     backgroundColor: "#FFFFFF",
-//   },
-//   container: {},
-//   main: {
-//     marginHorizontal: 16,
-//     marginTop: 32,
-//     height: "100%",
-//   },
-//   wrap: {
-//     flexDirection: "row",
-//     gap: 8,
-//     marginBottom: 32,
-//   },
-//   mainText: {
-//     color: "#212121",
-//     fontFamily: "Roboto",
-//     alignSelf: "center",
-//   },
-//   name: { fontSize: 13, fontWeight: 600 },
-//   email: { fontSize: 11, fontWeight: 500 },
-//   item: {
-//     width: "92%",
-//     height: 299,
-//     marginBottom: 32,
-//     marginLeft: "auto",
-//     marginRight: "auto",
-//   },
-//   wrapperImg: {
-//     width: "100%",
-//     height: 240,
-//     marginBottom: 8,
-//     borderWidth: 1,
-//     borderStyle: "solid",
-//     borderColor: "#E8E8E8",
-//     backgroundColor: "#F6F6F6",
-//   },
-//   img: {
-//     width: "100%",
-//     height: "100%",
-//     borderRadius: 8,
-//   },
-//   contentName: {
-//     marginBottom: 8,
-//     fontSize: 16,
-//     fontFamily: "roboto-medium",
-//     color: "#212121",
-//   },
-//   itemInfoContent: {
-//     display: "flex",
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//   },
-//   itemInfo: {
-//     display: "flex",
-//     flexDirection: "row",
-//     justifyContent: "flex-start",
-//     alignItems: "center",
-//   },
-//   comitText: {
-//     marginLeft: 4,
-//     fontSize: 16,
-//     fontFamily: "roboto-regular",
-//     color: "#BDBDBD",
-//   },
-//   mapText: {
-//     marginLeft: 4,
-//     fontSize: 16,
-//     fontFamily: "roboto-regular",
-//     color: "#212121",
-//     textDecorationLine: "underline",
-//   },
-//   footer: {
-//     flexDirection: "row",
-//     justifyContent: "center",
-//     borderTopWidth: 1,
-//     borderTopColor: "#BDBDBD",
-//     height: 83,
-//     alignItems: "center",
-//   },
-//   buttonLink: {
-//     color: "#FF6C00",
-//     borderRadius: 20,
-//     paddingVertical: 7,
-//     backgroundColor: "#FF6C00",
-//     width: 70,
-//     height: 40,
-//     alignItems: "center",
-//     marginHorizontal: 31,
-//   },
-// });
 
 export default PostsScreen;

@@ -231,7 +231,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     borderWidth: 1,
     borderRadius: 12,
-    // borderColor: "#FF6C00",
     backgroundColor: "#FFFFFF",
     width: 26,
     height: 26,
@@ -245,14 +244,12 @@ const styles = StyleSheet.create({
     color: "#FF6C00",
   },
   title: {
-    // font-family: Roboto;
     textAlign: "center",
     fontSize: 30,
     fontWeight: 500,
     marginBottom: 33,
   },
   input: {
-    // font-family: Roboto;
     backgroundColor: "#F6F6F6",
     borderWidth: 1,
     borderRadius: 8,
@@ -289,17 +286,14 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   buttonTextActive: {
-    // font-family: Roboto;
     fontSize: 16,
     color: "#FFFFFF",
   },
   buttonTextDisabled: {
-    // font-family: Roboto;
     fontSize: 16,
     color: "#BDBDBD",
   },
   loginText: {
-    // font-family: Roboto;
     fontSize: 16,
     color: "#1B4371",
     textAlign: "center",
@@ -313,7 +307,6 @@ const styles = StyleSheet.create({
     marginBottom: 43,
   },
   showText: {
-    // font-family: Roboto;
     fontSize: 16,
     color: "#1B4371",
   },
