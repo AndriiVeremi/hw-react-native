@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { login } from "../redux/auth/operations";
-import { selectAuthError } from "../redux/auth/selectors";
 import BackgroundImage from "../assets/Images/photoBG.jpg";
 import {
   ImageBackground,
@@ -29,10 +28,14 @@ const LoginScreen = () => {
   const [isButtonActive, setButtonActive] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const authError = useSelector(selectAuthError);
-  
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
+  const resetForm = () => {
+    setEmail("");
+    setPassword("");
+    setButtonActive(false)
+  };
 
   const onLogin = () => {
     if (email && password) {
@@ -41,13 +44,16 @@ const LoginScreen = () => {
           inputEmail: email,
           inputPassword: password,
         })
-      );
-
-      console.log("помилка в логіні -->", authError)
-
-      Alert.alert(authError);
-      if (authError) return;
-      // navigation.navigate("Home");
+      ).then((response) => {
+        if (response.type === "auth/login/fulfilled") {
+          Alert.alert("Вітаю!"``);
+          navigation.navigate("Home");
+          resetForm();
+          console.log("message");
+        } else {
+          return Alert.alert("Помилка", `Введений неправильний логін або пароль. Будь ласка, перевірте, чи правильно введені дані.`);
+        }
+      });
     }
   };
 
@@ -60,10 +66,7 @@ const LoginScreen = () => {
   }, [email, password]);
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-    >
+    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <ImageBackground
@@ -102,10 +105,7 @@ const LoginScreen = () => {
                     setPasswordInputStyles({ ...onBlurStyle });
                   }}
                 />
-                <Pressable
-                  style={styles.showTextButton}
-                  onPress={() => setShowPassword(!showPassword)}
-                >
+                <Pressable style={styles.showTextButton} onPress={() => setShowPassword(!showPassword)}>
                   <Text style={styles.showText}>{showPassword ? "Сховати" : "Показати"}</Text>
                 </Pressable>
               </View>
@@ -114,9 +114,7 @@ const LoginScreen = () => {
                 disabled={isButtonActive ? false : true}
                 onPress={onLogin}
               >
-                <Text style={isButtonActive ? styles.buttonTextActive : styles.buttonTextDisabled}>
-                  Увійти
-                </Text>
+                <Text style={isButtonActive ? styles.buttonTextActive : styles.buttonTextDisabled}>Увійти</Text>
               </Pressable>
               <Pressable onPress={() => navigation.navigate("Registration")}>
                 <Text style={styles.loginText}>Немає акаунту? Зареєструватися</Text>
@@ -226,4 +224,3 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
-

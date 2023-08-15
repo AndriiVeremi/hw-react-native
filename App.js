@@ -17,9 +17,7 @@ import Comments from "./Screens/CommentsScreen";
 import Map from "./Screens/MapScreen";
 import Posts from "./Screens/PostsScreen";
 
-
 const MainStack = createStackNavigator();
-
 
 const AppNavigation = () => {
   const isLoggedIn = useSelector(selectLoginState);
