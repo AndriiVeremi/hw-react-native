@@ -47,7 +47,7 @@ const LoginScreen = () => {
 
       Alert.alert(authError);
       if (authError) return;
-      navigation.navigate("Home");
+      // navigation.navigate("Home");
     }
   };
 
