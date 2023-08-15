@@ -45,7 +45,7 @@ export const login = createAsyncThunk(
       const profileImageUrl = await getDownloadURL(ref(storage, photoURL));
       return { email, login: displayName, userId: uid, photo: profileImageUrl };
     } catch (error) {
-      console.log(error.message);
+      console.log("помилка при запиті -->", error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }

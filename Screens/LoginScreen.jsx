@@ -28,7 +28,9 @@ const LoginScreen = () => {
   const [passwordInputStyles, setPasswordInputStyles] = useState({ ...onBlurStyle });
   const [isButtonActive, setButtonActive] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
   const authError = useSelector(selectAuthError);
+  
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -40,6 +42,9 @@ const LoginScreen = () => {
           inputPassword: password,
         })
       );
+
+      console.log("помилка в логіні -->", authError)
+
       Alert.alert(authError);
       if (authError) return;
       navigation.navigate("Home");
