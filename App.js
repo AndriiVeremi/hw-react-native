@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 // import { selectLoginState } from "./redux/auth/selectors";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from './config';
+// import { auth } from './config';
 import { updateProfile } from "firebase/auth";
 
 import Registration from "./Screens/RegistrationScreen";
@@ -23,7 +23,7 @@ const MainStack = createStackNavigator();
 
 const AppNavigation = () => {
   const [initialRouteName, setInitialRouteName] = useState(null);
-  // const auth = getAuth();
+  const auth = getAuth();
 
   useEffect(() => {
     auth.onAuthStateChanged((user) =>
