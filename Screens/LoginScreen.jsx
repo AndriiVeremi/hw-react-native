@@ -46,10 +46,8 @@ const LoginScreen = () => {
         })
       ).then((response) => {
         if (response.type === "auth/login/fulfilled") {
-          Alert.alert("Вітаю!");
           navigation.navigate("Home");
           resetForm();
-          console.log("message");
         } else {
           return Alert.alert("Помилка", `Введений неправильний логін або пароль. Будь ласка, перевірте, чи правильно введені дані.`);
         }
