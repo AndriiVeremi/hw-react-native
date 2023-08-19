@@ -38,6 +38,8 @@ const LoginScreen = () => {
   };
 
   const onLogin = () => {
+
+    Alert.alert(`${email}, успішно увійшли!`);
     if (email && password) {
       dispatch(
         login({

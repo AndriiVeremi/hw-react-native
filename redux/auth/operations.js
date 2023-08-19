@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
-import { auth, db, storage } from "../../config.js";
+import { auth, db, storage } from "../../config";
 
 export const register = createAsyncThunk(
   "auth/signup",
@@ -22,7 +22,7 @@ export const register = createAsyncThunk(
       const profileImageRef = ref(storage, createdUrl);
       await uploadBytes(profileImageRef, bytes);
       const profileImageUrl = await getDownloadURL(ref(storage, createdUrl));
-
+     
       await updateProfile(auth.currentUser, { displayName: inputLogin, photoURL: profileImageUrl });
       const { email, displayName, photoURL, uid } = auth.currentUser;
       await setDoc(doc(db, "posts", uid), {

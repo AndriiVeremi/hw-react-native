@@ -37,6 +37,7 @@ const RegistrationScreen = () => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [loginInputStyles, setLoginInputStyles] = useState({ ...onBlurStyle });
   const [emailInputStyles, setEmailInputStyles] = useState({ ...onBlurStyle });
   const [passwordInputStyles, setPasswordInputStyles] = useState({
@@ -70,13 +71,21 @@ const RegistrationScreen = () => {
   };
 
   const showImagePicker = async () => {
-    const permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    console.log(permissionResult);
+
     if (permissionResult.granted === false) {
-      alert("You've refused to allow this appp to access your photos!");
+      alert("Ви відмовилися дозволити цій програмі доступ до ваших фотографій!");
       return;
     }
-    const result = await ImagePicker.launchImageLibraryAsync();
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
     if (!result.canceled) {
       setProfilePhoto(result.assets[0].uri);
     }
@@ -91,10 +100,7 @@ const RegistrationScreen = () => {
   }, [login, email, password]);
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-    >
+    <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <ImageBackground
@@ -106,18 +112,9 @@ const RegistrationScreen = () => {
           >
             <View style={styles.box}>
               <Animated.View style={styles.imageWrapper}>
-                {profilePhoto && (
-                  <Image
-                    source={{ uri: profilePhoto }}
-                    style={styles.profileImage}
-                  ></Image>
-                )}
+                {profilePhoto && <Image source={{ uri: profilePhoto }} style={styles.profileImage}></Image>}
                 <Pressable style={styles.addButton} onPress={showImagePicker}>
-                  <AntDesign
-                    name="pluscircleo"
-                    size={25}
-                    style={styles.addBtn}
-                  />
+                  <AntDesign name="pluscircleo" size={25} style={styles.addBtn} />
                 </Pressable>
               </Animated.View>
               <Text style={styles.title}>Реєстрація</Text>
@@ -160,29 +157,16 @@ const RegistrationScreen = () => {
                     setPasswordInputStyles({ ...onBlurStyle });
                   }}
                 />
-                <Pressable
-                  style={styles.showTextButton}
-                  onPress={() => setShowPassword(!showPassword)}
-                >
-                  <Text style={styles.showText}>
-                    {showPassword ? "Сховати" : "Показати"}
-                  </Text>
+                <Pressable style={styles.showTextButton} onPress={() => setShowPassword(!showPassword)}>
+                  <Text style={styles.showText}>{showPassword ? "Сховати" : "Показати"}</Text>
                 </Pressable>
               </View>
               <Pressable
-                style={
-                  isButtonActive ? styles.activeButton : styles.disabledButton
-                }
+                style={isButtonActive ? styles.activeButton : styles.disabledButton}
                 disabled={isButtonActive ? false : true}
                 onPress={onRegister}
               >
-                <Text
-                  style={
-                    isButtonActive
-                      ? styles.buttonTextActive
-                      : styles.buttonTextDisabled
-                  }
-                >
+                <Text style={isButtonActive ? styles.buttonTextActive : styles.buttonTextDisabled}>
                   Зареєструватися
                 </Text>
               </Pressable>
