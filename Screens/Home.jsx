@@ -1,15 +1,24 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Pressable } from "react-native";
+import { useDispatch } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { logout } from "../redux/auth/operations";
 import PostsScreen from "./PostsScreen";
 import CreatePostsScreen from "./CreatePostsScreen";
 import ProfileScreen from "./ProfileScreen";
 
+
 const Home = () => {
   const Tabs = createBottomTabNavigator();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigation.navigate("Login");
+  };
 
   return (
     <Tabs.Navigator
@@ -45,17 +54,12 @@ const Home = () => {
           title: "Публікації",
           headerRightContainerStyle: { paddingRight: 16 },
           headerRight: () => (
-            <Feather
-              name="log-out"
-              size={24}
-              color="#BDBDBD"
-              onPress={() => navigation.navigate("Login")}
-            />
+            <Pressable onPress={handleLogout}>
+              <Feather name="log-out" size={24} color="#BDBDBD" />
+            </Pressable>
           ),
           tabBarActiveBackgroundColor: "#FFFFFF",
-          tabBarIcon: ({ size }) => (
-            <Feather name="grid" color="#BDBDBD" size={size} />
-          ),
+          tabBarIcon: ({ size }) => <Feather name="grid" color="#BDBDBD" size={size} />,
         }}
       />
       <Tabs.Screen
@@ -83,9 +87,7 @@ const Home = () => {
             borderRadius: 20,
             backgroundColor: "#FF6C00",
           },
-          tabBarIcon: ({ size }) => (
-            <Feather name="plus" color="#FFFFFF" size={size} />
-          ),
+          tabBarIcon: ({ size }) => <Feather name="plus" color="#FFFFFF" size={size} />,
         }}
       />
       <Tabs.Screen
@@ -94,13 +96,7 @@ const Home = () => {
         options={{
           headerShown: false,
           tabBarActiveTintColor: "#FFFFFF",
-          tabBarIcon: ({ size }) => (
-            <Feather
-              name="user"
-              size={size}
-              color="#BDBDBD"
-            />
-          ),         
+          tabBarIcon: ({ size }) => <Feather name="user" size={size} color="#BDBDBD" />,
         }}
       />
     </Tabs.Navigator>

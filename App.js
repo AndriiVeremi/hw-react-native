@@ -4,7 +4,7 @@ import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { PersistGate } from "redux-persist/integration/react";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { store, persistor } from "./redux/store";
 // import { selectLoginState } from "./redux/auth/selectors";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -22,16 +22,17 @@ import Posts from "./Screens/PostsScreen";
 const MainStack = createStackNavigator();
 
 const AppNavigation = () => {
-  const [initialRouteName, setInitialRouteName] = useState(null);
-  const auth = getAuth();
+  // const [initialRouteName, setInitialRouteName] = useState(null);
+  // const auth = getAuth();
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) =>
-      setInitialRouteName(user ? "Home" : "Login")
-    );
-  }, []);
+  // useEffect(() => {
+  //   auth.onAuthStateChanged((user) =>
+  //     setInitialRouteName(user ? "Home" : "Login")
+  //   );
+  // }, []);
 
   // const [isLogged, setIsLogged] = useState(null);
+  // const dispatch = useDispatch();
   // useEffect(() => {
   //   onAuthStateChanged(auth, async (user) => {
   //     if (user) {
@@ -47,11 +48,11 @@ const AppNavigation = () => {
   //   });
   // }, []);
 
-  console.log("стан -->", initialRouteName)
+  // console.log("стан -->", initialRouteName)
 
   return (
     <NavigationContainer>
-      <MainStack.Navigator initialRouteName={initialRouteName}>
+      <MainStack.Navigator initialRouteName={"Login"}>
         <MainStack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <MainStack.Screen name="Registration" component={Registration} options={{ headerShown: false }} />
         <MainStack.Screen name="Login" component={Login} options={{ headerShown: false }} />
