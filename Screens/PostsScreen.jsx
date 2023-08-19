@@ -7,22 +7,30 @@ import { getPosts } from "../redux/posts/operations";
 import { StyleSheet, Text, View, Image, FlatList, Pressable } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-const Item = ({ title, commentsAmount, location, imageUrl, onPressComments, onPressMap }) => (
-  <View style={styles.post}>
-    <Image style={styles.postImage} source={{ uri: imageUrl }}></Image>
-    <Text style={styles.postText}>{title}</Text>
-    <View style={styles.addInfoWrapper}>
-      <Pressable style={styles.commentButton} onPress={() => onPressComments()}>
-        <Feather style={styles.addInfoIcon} name="message-circle" size={24} />
-        <Text style={styles.commentText}>{commentsAmount}</Text>
-      </Pressable>
-      <Pressable style={styles.locationButton} onPress={() => onPressMap()}>
-        <Feather style={styles.addInfoIcon} name="map-pin" size={24} />
-        <Text style={styles.locationText}>{location}</Text>
-      </Pressable>
+const Item = ({ title, commentsAmount, location, imageUrl, likesAmount, onPressComments, onPressMap }) => {
+  return (
+    <View style={styles.post}>
+      <Image style={styles.postImage} source={{ uri: imageUrl }}></Image>
+      <Text style={styles.postText}>{title}</Text>
+      <View style={styles.addInfoWrapper}>
+        <Pressable style={styles.commentLikesButton} onPress={() => onPressComments()}>
+          <Feather color={commentsAmount === 0 ? "#BDBDBD" : "#FF6C00"} name="message-circle" size={24} />
+          <Text style={{ fontSize: 16, color: "#212121" }}>{commentsAmount}</Text>
+        </Pressable>
+
+        <View style={styles.commentLikesButton}>
+          <Feather color={likesAmount === 0 ? "#BDBDBD" : "#FF6C00"} name="thumbs-up" size={24} />
+          <Text style={{ fontSize: 16, color: "#212121" }}>{likesAmount}</Text>
+        </View>
+
+        <Pressable style={styles.locationButton} onPress={() => onPressMap()}>
+          <Feather color={location === 0 ? "#BDBDBD" : "#FF6C00"} name="map-pin" size={24} />
+          <Text style={styles.locationText}>{location}</Text>
+        </Pressable>
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 const PostsScreen = () => {
   const navigation = useNavigation();
@@ -89,6 +97,11 @@ const styles = StyleSheet.create({
     height: 299,
     marginBottom: 32,
   },
+  postText: {
+    fontSize: 16,
+    fontWeight: 500,
+    marginBottom: 8,
+  },
   profileWrapper: {
     width: "100%",
     marginBottom: 32,
@@ -117,16 +130,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 8,
   },
-  postText: {
-    fontSize: 16,
-    fontWeight: 500,
-    marginBottom: 8,
-  },
   addInfoWrapper: {
     width: "100%",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+  },
+  commentLikesButton: {
+    display: "flex",
+    gap: 6,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginRight: 24,
   },
   addInfoIcon: {
     color: "#BDBDBD",
@@ -137,10 +153,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-  },
-  commentText: {
-    fontSize: 16,
-    color: "#BDBDBD",
   },
   locationButton: {
     display: "flex",

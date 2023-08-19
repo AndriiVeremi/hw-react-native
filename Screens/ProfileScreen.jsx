@@ -34,7 +34,6 @@ const Item = ({ title, commentsAmount, location, imageUrl, likesAmount, onPressC
 };
 
 const ProfileScreen = () => {
- 
   const profilePhotoOld = useSelector(selectUserPhoto);
   const login = useSelector(selectUserLogin);
   const fetchedPosts = useSelector(selectAllPosts);
