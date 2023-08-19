@@ -1,15 +1,11 @@
 import "react-native-gesture-handler";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { PersistGate } from "redux-persist/integration/react";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
-// import { selectLoginState } from "./redux/auth/selectors";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-// import { auth } from './config';
-import { updateProfile } from "firebase/auth";
 
 import Registration from "./Screens/RegistrationScreen";
 import Login from "./Screens/LoginScreen";

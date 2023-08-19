@@ -35,11 +35,10 @@ const LoginScreen = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
-      if (user) {       
+      if (user) {   
+        console.log(user)    
         navigation.navigate("Home");       
-      } else {
-        navigation.navigate("Login");      
-      }
+      } 
     });
   }, []);
 

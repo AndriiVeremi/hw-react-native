@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { selectUserPhoto, selectUserLogin } from "../redux/auth/selectors";
@@ -6,6 +6,7 @@ import { logout } from "../redux/auth/operations";
 import { selectAllPosts } from "../redux/posts/selectors";
 import { View, ScrollView, Pressable, ImageBackground, Image, Text, StyleSheet, FlatList } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
 
 const Item = ({ title, commentsAmount, location, imageUrl, likesAmount, onPressComments, onPressMap }) => {
   return (
@@ -14,17 +15,17 @@ const Item = ({ title, commentsAmount, location, imageUrl, likesAmount, onPressC
       <Text style={styles.postText}>{title}</Text>
       <View style={styles.addInfoWrapper}>
         <Pressable style={styles.commentLikesButton} onPress={() => onPressComments()}>
-          <Feather style={{ color: "#FF6C00" }} name="message-circle" size={24} />
+          <Feather color={commentsAmount === 0 ? "#BDBDBD" : "#FF6C00"} name="message-circle" size={24} />
           <Text style={{ fontSize: 16, color: "#212121" }}>{commentsAmount}</Text>
         </Pressable>
 
         <View style={styles.commentLikesButton}>
-          <Feather style={{ color: "#FF6C00" }} name="thumbs-up" size={24} />
+          <Feather color={likesAmount === 0 ? "#BDBDBD" : "#FF6C00"} name="thumbs-up" size={24} />
           <Text style={{ fontSize: 16, color: "#212121" }}>{likesAmount}</Text>
         </View>
 
         <Pressable style={styles.locationButton} onPress={() => onPressMap()}>
-          <Feather style={{ color: "#BDBDBD" }} name="map-pin" size={24} />
+          <Feather color={location === 0 ? "#BDBDBD" : "#FF6C00"} name="map-pin" size={24} />
           <Text style={styles.locationText}>{location}</Text>
         </Pressable>
       </View>
@@ -33,15 +34,37 @@ const Item = ({ title, commentsAmount, location, imageUrl, likesAmount, onPressC
 };
 
 const ProfileScreen = () => {
-  const profilePhoto = useSelector(selectUserPhoto);
+ 
+  const profilePhotoOld = useSelector(selectUserPhoto);
   const login = useSelector(selectUserLogin);
   const fetchedPosts = useSelector(selectAllPosts);
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  const [profilePhoto, setProfilePhoto] = useState(profilePhotoOld);
+
   const handleLogout = () => {
     dispatch(logout());
     navigation.navigate("Login");
+  };
+
+  const showImagePicker = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Ви відмовилися дозволити цій програмі доступ до ваших фотографій!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    if (!result.canceled) {
+      setProfilePhoto(result.assets[0].uri);
+    }
   };
 
   return (
@@ -56,7 +79,7 @@ const ProfileScreen = () => {
         <View style={styles.container}>
           <View style={styles.img}>
             {profilePhoto && <Image source={{ uri: profilePhoto }} style={styles.avatar}></Image>}
-            <AntDesign name="pluscircleo" size={24} style={styles.addBtn} />
+            <AntDesign name="pluscircleo" size={24} style={styles.addBtn} onPress={showImagePicker} />
           </View>
           <Pressable style={styles.logoutIcon} onPress={handleLogout}>
             <Feather name="log-out" size={24} color="#BDBDBD" />
