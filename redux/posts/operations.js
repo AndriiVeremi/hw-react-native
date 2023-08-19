@@ -44,16 +44,15 @@ export const createPost = createAsyncThunk("posts/create", async ({ userId, newP
 
 export const addComment = createAsyncThunk("posts/addComment", async ({ userId, postId, newComment }, thunkAPI) => {
   try {
+  
    const docRef = doc(db, "posts", userId);
     const docSnap = await getDoc(docRef);
     const allPosts = docSnap.data().posts;
-    // const { photoURL } = auth.currentUser;
+    const { photoURL, imageURL } = auth.currentUser;
+
     const updatedPosts = allPosts.map((post) => {
       if (post.id === postId) {
-        console.log(post);
-        // post.comments.push({ ...newComment, author: photoURL });
-        post.comments.push({ ...newComment});
-        console.log(auth.currentUser)
+        post.comments.push({ ...newComment, photoURL: photoURL });    
       }
       return post;
     });
@@ -67,26 +66,4 @@ export const addComment = createAsyncThunk("posts/addComment", async ({ userId, 
   }
 });
 
-// export const addLike = async (postId, likesAmount) => {
-//   try {
-//     const postDocRef = doc(db, "posts", postId);
-//     await updateDoc(postDocRef, {
-//       likesAmount: likesAmount + 1,
-//       likeStatus: true,
-//     });
-//   } catch (error) {
-//     console.log("error-message", error.message);
-//   }
-// };
 
-// export const removeLike = async (postId, likesAmount) => {
-//   try {
-//     const postDocRef = doc(db, "posts", postId);
-//     await updateDoc(postDocRef, {
-//       likesAmount: likesAmount - 1,
-//       likeStatus: false,
-//     });
-//   } catch (error) {
-//     console.log("error-message", error.message);
-//   }
-// };

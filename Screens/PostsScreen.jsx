@@ -48,7 +48,7 @@ const PostsScreen = () => {
     dispatch(getPosts(userId));
   }, [userId]);
 
-  console.log(fetchedPosts);
+  // console.log(fetchedPosts);
 
   return (
     <View style={styles.container}>

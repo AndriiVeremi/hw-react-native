@@ -66,7 +66,7 @@ const CommentsScreen = ({ route }) => {
               <FlatList
                 data={comments}
                 renderItem={({ item }) => (
-                  <Item authorProfilePic={item.author} text={item.text} date={getDate(item.id)} />
+                  <Item authorProfilePic={item.photoURL} text={item.text} date={getDate(item.id)} />
                 )}
                 keyExtractor={(item) => item.id}
                 scrollEnabled={false}

@@ -8,14 +8,7 @@ import { View, ScrollView, TouchableOpacity, ImageBackground, Image, Text, Style
 import { Feather, AntDesign } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
-const Item = ({ 
-  title, 
-  commentsAmount, 
-  location, 
-  imageUrl, 
-  likesAmount, 
-  onPressComments, 
-  onPressMap }) => {
+const Item = ({ title, commentsAmount, location, imageUrl, likesAmount, onPressComments, onPressMap }) => {
   return (
     <View style={styles.post}>
       <Image style={styles.postImage} source={{ uri: imageUrl }}></Image>
