@@ -22,33 +22,6 @@ import Posts from "./Screens/PostsScreen";
 const MainStack = createStackNavigator();
 
 const AppNavigation = () => {
-  // const [initialRouteName, setInitialRouteName] = useState(null);
-  // const auth = getAuth();
-
-  // useEffect(() => {
-  //   auth.onAuthStateChanged((user) =>
-  //     setInitialRouteName(user ? "Home" : "Login")
-  //   );
-  // }, []);
-
-  // const [isLogged, setIsLogged] = useState(null);
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, async (user) => {
-  //     if (user) {
-  //       const uid = user.uid;
-  //       const data = await getUserData(uid);
-  //       dispatch(updateUserData({ ...data, uid }));
-  //       // navigation.navigate("Home");
-  //       setIsLogged(true);
-  //     } else {
-  //       // navigation.navigate("Login");
-  //       setIsLogged(true);
-  //     }
-  //   });
-  // }, []);
-
-  // console.log("стан -->", initialRouteName)
 
   return (
     <NavigationContainer>

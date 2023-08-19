@@ -16,6 +16,7 @@ import {
   Platform,
   Alert,
 } from "react-native";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const onFocusStyle = { borderColor: "#FF6C00", color: "#212121", backgroundColor: "#FFFFFF" };
 const onBlurStyle = { borderColor: "#E8E8E8", color: "#BDBDBD", backgroundColor: "#F6F6F6" };
@@ -30,6 +31,17 @@ const LoginScreen = () => {
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const auth = getAuth();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {       
+        navigation.navigate("Home");       
+      } else {
+        navigation.navigate("Login");      
+      }
+    });
+  }, []);
 
   const resetForm = () => {
     setEmail("");
@@ -38,7 +50,6 @@ const LoginScreen = () => {
   };
 
   const onLogin = () => {
-
     Alert.alert(`${email}, успішно увійшли!`);
     if (email && password) {
       dispatch(
