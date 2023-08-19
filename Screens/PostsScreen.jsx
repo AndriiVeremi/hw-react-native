@@ -1,32 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { selectUserId, selectUserLogin, selectUserEmail, selectUserPhoto } from "../redux/auth/selectors";
 import { selectAllPosts } from "../redux/posts/selectors";
 import { getPosts } from "../redux/posts/operations";
-import { StyleSheet, Text, View, Image, FlatList, Pressable } from "react-native";
+import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-const Item = ({ title, commentsAmount, location, imageUrl, likesAmount, onPressComments, onPressMap }) => {
+const Item = ({ title, likesAmount, commentsAmount, location, imageUrl, onPressComments, onPressMap }) => {
   return (
     <View style={styles.post}>
       <Image style={styles.postImage} source={{ uri: imageUrl }}></Image>
       <Text style={styles.postText}>{title}</Text>
       <View style={styles.addInfoWrapper}>
-        <Pressable style={styles.commentLikesButton} onPress={() => onPressComments()}>
+        <TouchableOpacity style={styles.commentLikesButton} onPress={() => onPressComments()}>
           <Feather color={commentsAmount === 0 ? "#BDBDBD" : "#FF6C00"} name="message-circle" size={24} />
           <Text style={{ fontSize: 16, color: "#212121" }}>{commentsAmount}</Text>
-        </Pressable>
+        </TouchableOpacity>
 
-        <View style={styles.commentLikesButton}>
-          <Feather color={likesAmount === 0 ? "#BDBDBD" : "#FF6C00"} name="thumbs-up" size={24} />
-          <Text style={{ fontSize: 16, color: "#212121" }}>{likesAmount}</Text>
-        </View>
+        <TouchableOpacity>
+          <View style={styles.commentLikesButton}>
+            <Feather color={likesAmount === 0 ? "#BDBDBD" : "#FF6C00"} name="thumbs-up" size={24} />
+            <Text style={{ fontSize: 16, color: "#212121" }}>{likesAmount}</Text>
+          </View>
+        </TouchableOpacity>
 
-        <Pressable style={styles.locationButton} onPress={() => onPressMap()}>
+        <TouchableOpacity style={styles.locationButton} onPress={() => onPressMap()}>
           <Feather color={location === 0 ? "#BDBDBD" : "#FF6C00"} name="map-pin" size={24} />
           <Text style={styles.locationText}>{location}</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -46,6 +48,8 @@ const PostsScreen = () => {
     dispatch(getPosts(userId));
   }, [userId]);
 
+  console.log(fetchedPosts);
+
   return (
     <View style={styles.container}>
       <View style={styles.profileWrapper}>
@@ -62,6 +66,7 @@ const PostsScreen = () => {
             <Item
               title={item.name}
               commentsAmount={item.comments.length}
+              likesAmount={item.likes}
               imageUrl={item.imageUrl}
               location={item.location.name}
               onPressComments={() => {

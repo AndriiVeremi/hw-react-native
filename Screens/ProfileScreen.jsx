@@ -4,30 +4,37 @@ import { useNavigation } from "@react-navigation/native";
 import { selectUserPhoto, selectUserLogin } from "../redux/auth/selectors";
 import { logout } from "../redux/auth/operations";
 import { selectAllPosts } from "../redux/posts/selectors";
-import { View, ScrollView, Pressable, ImageBackground, Image, Text, StyleSheet, FlatList } from "react-native";
+import { View, ScrollView, TouchableOpacity, ImageBackground, Image, Text, StyleSheet, FlatList } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
-const Item = ({ title, commentsAmount, location, imageUrl, likesAmount, onPressComments, onPressMap }) => {
+const Item = ({ 
+  title, 
+  commentsAmount, 
+  location, 
+  imageUrl, 
+  likesAmount, 
+  onPressComments, 
+  onPressMap }) => {
   return (
     <View style={styles.post}>
       <Image style={styles.postImage} source={{ uri: imageUrl }}></Image>
       <Text style={styles.postText}>{title}</Text>
       <View style={styles.addInfoWrapper}>
-        <Pressable style={styles.commentLikesButton} onPress={() => onPressComments()}>
+        <TouchableOpacity style={styles.commentLikesButton} onPress={() => onPressComments()}>
           <Feather color={commentsAmount === 0 ? "#BDBDBD" : "#FF6C00"} name="message-circle" size={24} />
           <Text style={{ fontSize: 16, color: "#212121" }}>{commentsAmount}</Text>
-        </Pressable>
+        </TouchableOpacity>
 
         <View style={styles.commentLikesButton}>
           <Feather color={likesAmount === 0 ? "#BDBDBD" : "#FF6C00"} name="thumbs-up" size={24} />
           <Text style={{ fontSize: 16, color: "#212121" }}>{likesAmount}</Text>
         </View>
 
-        <Pressable style={styles.locationButton} onPress={() => onPressMap()}>
+        <TouchableOpacity style={styles.locationButton} onPress={() => onPressMap()}>
           <Feather color={location === 0 ? "#BDBDBD" : "#FF6C00"} name="map-pin" size={24} />
           <Text style={styles.locationText}>{location}</Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -80,9 +87,9 @@ const ProfileScreen = () => {
             {profilePhoto && <Image source={{ uri: profilePhoto }} style={styles.avatar}></Image>}
             <AntDesign name="pluscircleo" size={24} style={styles.addBtn} onPress={showImagePicker} />
           </View>
-          <Pressable style={styles.logoutIcon} onPress={handleLogout}>
+          <TouchableOpacity style={styles.logoutIcon} onPress={handleLogout}>
             <Feather name="log-out" size={24} color="#BDBDBD" />
-          </Pressable>
+          </TouchableOpacity>
           <Text style={styles.heading}>{login}</Text>
           {fetchedPosts.length > 0 && (
             <FlatList

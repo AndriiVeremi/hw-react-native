@@ -66,3 +66,27 @@ export const addComment = createAsyncThunk("posts/addComment", async ({ userId, 
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+// export const addLike = async (postId, likesAmount) => {
+//   try {
+//     const postDocRef = doc(db, "posts", postId);
+//     await updateDoc(postDocRef, {
+//       likesAmount: likesAmount + 1,
+//       likeStatus: true,
+//     });
+//   } catch (error) {
+//     console.log("error-message", error.message);
+//   }
+// };
+
+// export const removeLike = async (postId, likesAmount) => {
+//   try {
+//     const postDocRef = doc(db, "posts", postId);
+//     await updateDoc(postDocRef, {
+//       likesAmount: likesAmount - 1,
+//       likeStatus: false,
+//     });
+//   } catch (error) {
+//     console.log("error-message", error.message);
+//   }
+// };
