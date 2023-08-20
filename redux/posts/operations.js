@@ -44,7 +44,6 @@ export const createPost = createAsyncThunk("posts/create", async ({ userId, newP
 
 export const addComment = createAsyncThunk("posts/addComment", async ({ userId, postId, newComment }, thunkAPI) => {
   try {
-  
    const docRef = doc(db, "posts", userId);
     const docSnap = await getDoc(docRef);
     const allPosts = docSnap.data().posts;

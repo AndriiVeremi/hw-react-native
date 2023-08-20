@@ -135,10 +135,10 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   textWrapper: {
-    width: "100%",
-    backgroundColor: "#00000008",
+    width: "88%",
+    backgroundColor: "#F6F6F6",
     borderRadius: 6,
-    borderBottomLeftRadius: 0,
+    // borderBottomLeftRadius: 0,
     padding: 16,
   },
   text: {

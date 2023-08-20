@@ -35,14 +35,13 @@ const LoginScreen = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
-      if (user) {   
-        console.log(user)    
+      if (user) {      
         navigation.navigate("Home");       
       } 
     });
   }, []);
 
-  const resetForm = () => {
+  const reset = () => {
     setEmail("");
     setPassword("");
     setButtonActive(false)
@@ -59,7 +58,7 @@ const LoginScreen = () => {
       ).then((response) => {
         if (response.type === "auth/login/fulfilled") {
           navigation.navigate("Home");
-          resetForm();
+          reset();
         } else {
           return Alert.alert("Помилка", `Введений неправильний логін або пароль. Будь ласка, перевірте, чи правильно введені дані.`);
         }
