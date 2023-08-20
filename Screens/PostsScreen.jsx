@@ -48,8 +48,6 @@ const PostsScreen = () => {
     dispatch(getPosts(userId));
   }, [userId]);
 
-  // console.log(fetchedPosts);
-
   return (
     <View style={styles.container}>
       <View style={styles.profileWrapper}>

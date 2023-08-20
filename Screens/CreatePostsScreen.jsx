@@ -89,7 +89,6 @@ const CreatePostsScreen = () => {
     };
 
     dispatch(createPost({ userId, newPost }));
-    console.log("тут діспатчу пост");
     reset();
   };
 
