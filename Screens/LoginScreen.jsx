@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { login } from "../redux/auth/operations";
 import BackgroundImage from "../assets/Images/photoBG.jpg";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   ImageBackground,
   StyleSheet,
@@ -16,7 +17,6 @@ import {
   Platform,
   Alert,
 } from "react-native";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const onFocusStyle = { borderColor: "#FF6C00", color: "#212121", backgroundColor: "#FFFFFF" };
 const onBlurStyle = { borderColor: "#E8E8E8", color: "#BDBDBD", backgroundColor: "#F6F6F6" };
@@ -24,8 +24,10 @@ const onBlurStyle = { borderColor: "#E8E8E8", color: "#BDBDBD", backgroundColor:
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [emailInputStyles, setEmailInputStyles] = useState({ ...onBlurStyle });
   const [passwordInputStyles, setPasswordInputStyles] = useState({ ...onBlurStyle });
+
   const [isButtonActive, setButtonActive] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -48,7 +50,6 @@ const LoginScreen = () => {
   };
 
   const onLogin = () => {
-    Alert.alert(`${email}, успішно увійшли!`);
     if (email && password) {
       dispatch(
         login({
@@ -58,6 +59,7 @@ const LoginScreen = () => {
       ).then((response) => {
         if (response.type === "auth/login/fulfilled") {
           navigation.navigate("Home");
+          Alert.alert(`${email}, Ви успішно увійшли!`);
           reset();
         } else {
           return Alert.alert("Помилка", `Введений неправильний логін або пароль. Будь ласка, перевірте, чи правильно введені дані.`);
